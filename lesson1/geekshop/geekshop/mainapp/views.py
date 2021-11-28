@@ -15,9 +15,9 @@ def products(request):
         'user'  : 'наш гость',
         'range' : [1,2,3] }
 
-    products = Product.objects.all()
+    context['products'] = Product.objects.all()
     categories = ProductCategory.objects.all()
     context['categories'] = categories
-    context['products'] = products
+
     return render(request, 'mainapp/products.html', context)
 

@@ -30,11 +30,10 @@ class Command(BaseCommand):
             prod = product.get('fields')
             prod['id'] = product.get('pk')
             category = prod.get("category")
-            # Получаем категорию по ид
             _category = ProductCategory.objects.get(id=category)
             prod['category'] = _category
             new_product = Product(**prod)
             new_product.save()
 
-        # Создаем суперпользователя при помощи менеджера модели
+        # Создаем суперпользователя
         #super_user = User.objects.create_superuser('olga', '', '123')
