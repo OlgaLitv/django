@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.contrib import auth
-from authapp.forms import UserLoginForm, UserRegisterForm
+from django.contrib import auth, messages
+from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from django.urls import reverse
 from authapp.models import User
 
@@ -15,6 +15,7 @@ def register(request):
             #если нашли пользователя с таким же email, то не создаем нового, это ошибка
             if repeat_email_count == 0:
                 form.save()
+                messages.success(request, 'Вы успешно зарегистрированы')
                 return HttpResponseRedirect(reverse('authapp:login'))
             else:
                 print(form.errors)
@@ -51,6 +52,20 @@ def login(request):
         'form': form
     }
     return render(request, 'authapp/login.html', context)
+
+def profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(instance=request.user,data=request.POST,files=request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Данные успешно сохранены!')
+        else:
+            print(form.errors)
+    context = {
+        'title': 'Geekshop | Профайл',
+        'form' : UserProfileForm(instance=request.user)
+    }
+    return render(request, 'authapp/profile.html', context)
 
 
 def logout(request):
