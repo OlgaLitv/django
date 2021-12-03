@@ -59,7 +59,7 @@
                                 </a>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="#">{{prod.name}}</a>
+                                        <a href="{% url 'mainapp:details' prod.id %}" >{{prod.name}}</a>
                                     </h4>
                                     <h5>{{prod.price}} руб.</h5>
                                     <p class="card-text">{{prod.description}}</p>
@@ -96,12 +96,7 @@
 <!-- /.container -->
 {% endblock%}
 {% block footer %}
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; GeekShop 2021</p>
-    </div>
-    <!-- /.container -->
-</footer>
+    {% include 'mainapp/footer.html' %}
 {% endblock%}
 
 <!-- Bootstrap core JavaScript -->

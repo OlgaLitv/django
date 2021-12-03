@@ -21,3 +21,13 @@ def products(request):
 
     return render(request, 'mainapp/products.html', context)
 
+
+def details(request, product_id):
+    context = {
+        'title' : "Geekshop",
+        'user'  : request.user
+    }
+
+    context['product'] = Product.objects.get(id=product_id)
+
+    return render(request, 'mainapp/details.html', context)
