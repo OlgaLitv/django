@@ -62,9 +62,7 @@ def profile(request):
     form = UserProfileForm(instance=request.user)
     if request.method == 'POST':
         form = UserProfileForm(instance=request.user,data=request.POST,files=request.FILES)
-        if request.user.age > 100:
-            print(form.errors)
-        elif form.is_valid():
+        if form.is_valid():
             form.save()
             messages.success(request, 'Данные успешно сохранены!')
         else:
