@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from authapp.models import User
+from authapp.validator import validate_size
 
 
 class UserLoginForm(AuthenticationForm):
@@ -36,7 +37,7 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserProfileForm(UserChangeForm):
-    image = forms.ImageField(widget=forms.FileInput(),required=False)
+    image = forms.ImageField(widget=forms.FileInput(),validators=[validate_size],required=False )
     age = forms.IntegerField(widget=forms.NumberInput(),required=False)
 
     class Meta:
