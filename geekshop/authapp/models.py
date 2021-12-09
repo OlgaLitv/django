@@ -7,3 +7,4 @@ class User(AbstractUser):
     image = models.ImageField(upload_to='users_image', blank=True)
     age = models.PositiveSmallIntegerField(default=18, validators=[ MaxValueValidator(100),
             MinValueValidator(14)])
+
