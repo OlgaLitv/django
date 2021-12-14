@@ -35,14 +35,14 @@ class UserAdminProfileForm(UserProfileForm):
         self.fields['image'].widget.attrs['class'] = 'custom-file-input'
 
 
-class ProductAdminRegisterForm(ModelForm):
+class ProductAdminForm(ModelForm):
 
     class Meta:
         model = Product
         fields = ('name', 'description', 'price', 'quantity', 'category', 'image')
 
     def __init__(self, *args, **kwargs):
-        super(ProductAdminRegisterForm, self).__init__(*args, **kwargs)
+        super(ProductAdminForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs['placeholder'] = 'Введите название продукта'
         self.fields['description'].widget.attrs['placeholder'] = 'Введите описание продукта'
         self.fields['quantity'].widget.attrs['placeholder'] = 'Введите количество товара на складе'
@@ -55,28 +55,14 @@ class ProductAdminRegisterForm(ModelForm):
         self.fields['category'].widget.attrs['class'] = 'related-widget-wrapper'
 
 
-class CategoryAdminRegisterForm(ModelForm):
+class CategoryAdminForm(ModelForm):
 
     class Meta:
         model = ProductCategory
         fields = ('name', 'description')
 
     def __init__(self, *args, **kwargs):
-        super(CategoryAdminRegisterForm, self).__init__(*args, **kwargs)
+        super(CategoryAdminForm, self).__init__(*args, **kwargs)
         for _, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
-
-
-class CategoryAdminProfileForm(ModelForm):
-    class Meta:
-        model = ProductCategory
-        fields = ('name', 'description')
-
-    def __init__(self, *args, **kwargs):
-        super(CategoryAdminProfileForm, self).__init__(*args, **kwargs)
-        for _, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control py-4'
-
-
-
 
