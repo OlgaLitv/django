@@ -10,9 +10,11 @@ from django.views.generic import ListView, CreateView,UpdateView,DeleteView,Deta
 from mainapp.mixin import BaseClassContextMixin, UserDispatchMixin
 
 
+
 @user_passes_test(lambda u: u.is_superuser)
 def index(request):
     return render(request, 'admins/admin.html')
+
 
 
 class UserListView(ListView, BaseClassContextMixin, UserDispatchMixin):
@@ -50,9 +52,6 @@ class UserDeleteView(DeleteView, UserDispatchMixin):
         self.object.is_active = not self.object.is_active
         self.object.save()
         return HttpResponseRedirect(success_url)
-
-
-
 
 class ProductListView(ListView, BaseClassContextMixin, UserDispatchMixin):
     model = Product
@@ -113,6 +112,8 @@ class CategoryDeleteView(DeleteView, UserDispatchMixin):
     template_name = 'admins/admin-categories-update-delete.html'
     form_class = CategoryAdminForm
     success_url = reverse_lazy('admins:admin_categories')
+
+
 
 
 
